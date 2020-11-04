@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Sunburst chart</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  height: 4000px;
+  width: 4000px;
+  
+}
+    /* EOS */
+  </style>
+
+  <script id="insert"></script>
+
+
+    <script src="/js/stringify.js?22a652ba743b18b574be86f11f0f3591afb2159c" charset="utf-8"></script>
+    <script>
+      const customConsole = (w) => {
+        const pushToConsole = (payload, type) => {
+          w.parent.postMessage({
+            console: {
+              payload: stringify(payload),
+              type:    type
+            }
+          }, "*")
+        }
+
+        w.onerror = (message, url, line, column) => {
+          // the line needs to correspond with the editor panel
+          // unfortunately this number needs to be altered every time this view is changed
+          line = line - 70
+          if (line < 0){
+            pushToConsole(message, "error")
+          } else {
+            pushToConsole(`[${line}:${column}] ${message}`, "error")
+          }
+        }
+
+        let console = (function(systemConsole){
+          return {
+            log: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "log")
+              systemConsole.log.apply(this, args)
+            },
+            info: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "info")
+              systemConsole.info.apply(this, args)
+            },
+            warn: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "warn")
+              systemConsole.warn.apply(this, args)
+            },
+            error: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "error")
+              systemConsole.error.apply(this, args)
+            },
+            system: function(arg){
+              pushToConsole(arg, "system")
+            },
+            clear: function(){
+              systemConsole.clear.apply(this, {})
+            },
+            time: function(label){
+              pushToConsole(label, "log")
+              systemConsole.time.apply(this, label)
+            },
+            assert: function(arg){
+              let args = Array.from(arguments)
+              pushToConsole(args, "log")
+              systemConsole.assert.apply(this, args)
+            },
+            dir: function(object){
+              pushToConsole(object, "log")
+              systemConsole.dir.apply(this, object)
+            }
+          }
+        }(window.console))
+
+        window.console = console
+
+        console.system("Running fiddle")
+      }
+
+      if (window.parent){
+        customConsole(window)
+      }
+    </script>
+</head>
+<body>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/sunburst.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<div id="chartdiv"></div>
+
+    <script type="text/javascript">//<![CDATA[
+
+
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 4.
+ * 
+ * For more information visit:
+ * https://www.amcharts.com/
+ * 
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v4/
+ * ---------------------------------------
+ */
+
+// Themes begin
+am4core.useTheme(am4themes_kelly);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// create chart
+var chart = am4core.create("chartdiv", am4plugins_sunburst.Sunburst);
+chart.padding(0, 0, 0, 0);
+chart.radius = am4core.percent(98);
+chart.exporting.menu = new am4core.ExportMenu();
+chart.exporting.menu.align = "left";
+chart.exporting.menu.verticalAlign = "top"
+
+chart.data = [{
+    name: "Artificial Intelligence",
+    children: [{
+        name: "Pattern recognition",
+        value: 100,
+        children: [{
+          name: "Hong Kong University of Science & Technology",
+          value: 100
+        }]
+      },
+      {
+        name: "Simulation & model",
+        children: [{
+          name: "National University of Singapore",
+          value: 100
+        }, {
+          name: "Egypt-Japan University of Science and Technology",
+          value: 100
+        }]
+      },
+      {
+        name: "Algoritm at scale",
+        children: [{
+            name: "University of New South Wales",
+            value: 100
+          },
+          {
+            name: "Stanford University",
+            value: 100
+          }
+        ]
+      },
+      {
+        name: "Interactive Intelligence",
+        children: [{
+            name: "Georgia Institute of Technology",
+            value: 100
+          },
+          {
+            name: "University of São Paulo",
+            value: 100
+          }
+        ]
+      },
+      {
+        name: "Machine Learning",
+        children: [{
+          name: "ETH Zurich",
+          value: 100
+        }, {
+          name: "University of Tartu",
+          value: 100
+        }, {
+          name: "Washington University",
+          value: 100
+        }]
+      },
+      {
+        name: "Natural Language Processing",
+        children: [{
+          name: "University of Applied Sciences",
+          value: 100
+        }, {
+          name: "City University of Hong Kong",
+          value: 100
+        }, {
+          name: "Khalifa University",
+          value: 100
+        }]
+      }
+    ]
+  },
+  {
+    name: "Data Science",
+    children: [{
+        name: "Data Mining",
+        children: [{
+          name: "National University of Singapore",
+          value: 100
+        }, {
+          name: "Hong Kong University of Science and Technology",
+          value: 100
+        }]
+      },
+      {
+        name: "Big Data Management",
+        children: [{
+          name: "University of Tartu",
+          value: 100
+        }, {
+          name: "RMIT university",
+          value: 100
+        }]
+      },
+      {
+        name: "Data Structures & algorithms",
+        children: [{
+          name: "University of New South Wales",
+          value: 100
+        }]
+      },
+      {
+        name: "Data Visualisation & analytics",
+        children: [{
+          name: "Pontificia Universidad Católica de Chile (UC)",
+          value: 100
+        }, {
+          name: "University of São Paulo",
+          value: 100
+        }]
+      }
+    ]
+  },
+  {
+    name: "Cyber Security",
+    children: [{
+        name: "Data & Security",
+        children: [{
+            name: "Missouri University of Science and Technology",
+            value: 100
+          },
+          {
+            name: "University of Applied Sciences",
+            value: 100
+          }
+        ]
+      },
+      {
+        name: "Network & Information Security Management",
+        children: [{
+          name: "University of Essex",
+          value: 100
+        }, {
+          name: "Georgia Institute of Technology",
+          value: 100
+        }]
+      },
+      {
+        name: "Financial Fraud Analytics",
+        children: [{
+          name: "Hong Kong University of Science and Technology",
+          value: 100
+        }]
+      }
+    ]
+  },
+  {
+    name: "Cloud Computing",
+    children: [{
+        name: "Databases and cloud",
+        children: [{
+          name: "University of Barth",
+          value: 100
+        }]
+
+      },
+      {
+        name: "Distributed systems & cloud",
+        children: [{
+          name: "University of Tartu",
+          value: 100
+        }]
+
+      }
+    ]
+  },
+  {
+    name: "Software Engineering",
+    children: [{
+        name: "Software development",
+        children: [{
+          name: "University of Essex",
+          value: 100
+        }]
+      },
+      {
+        name: "Software design",
+        children: [{
+          name: "Stanford University",
+          value: 100
+        }]
+      },
+      {
+        name: "Software development for quantitative finance",
+        children: [{
+          name: "Hong Kong University of Science and Technology",
+          value: 100
+        }]
+      }
+    ]
+  }, {
+    name: "Information Systems",
+    children: [{
+        name: "Networked Information Systems",
+        children: [{
+          name: "Australian National University",
+          value: 100
+        }]
+      },
+      {
+        name: "Information system & cloud",
+        children: [{
+          name: "Missouri University of Science and Technology",
+          value: 100
+        }]
+      }
+    ]
+  }, {
+    name: "Bioinformatics",
+    children: [{
+        name: "Bioinspired Computing",
+        children: [{
+          name: "University of São Paulo",
+          value: 100
+        }]
+      },
+      {
+        name: "Computational Neuroscience",
+        children: [{
+          name: "University of Tartu",
+          value: 100
+        }]
+      }
+    ]
+  }, {
+    name: "Game Design",
+    children: [{
+      name: "Hong Kong University of Science and Technology",
+      value: 100
+
+    }, {
+      name: "University of Tartu",
+      value: 100
+    }]
+  }, {
+    name: "Programming",
+    children: [{
+      name: "University of Barth",
+      value: 100
+
+    }, {
+      name: "University of Adelaide",
+      value: 100
+    }, {
+      name: "Stanford University",
+      value: 100
+    }, {
+      name: "University of Cape town",
+      value: 100
+    }]
+  }
+];
+
+chart.colors.step = 2;
+chart.fontSize = 40;
+chart.innerRadius = am4core.percent(10);
+
+// define data fields
+chart.dataFields.value = "value";
+chart.dataFields.name = "name";
+chart.dataFields.children = "children";
+
+
+var level0SeriesTemplate = new am4plugins_sunburst.SunburstSeries();
+level0SeriesTemplate.hiddenInLegend = false;
+chart.seriesTemplates.setKey("0", level0SeriesTemplate)
+
+// this makes labels to be hidden if they don't fit
+level0SeriesTemplate.labels.template.truncate = true;
+level0SeriesTemplate.labels.template.text = "{category} {name.name}";
+//level0SeriesTemplate.labels.template.hideOversized = true;
+
+level0SeriesTemplate.labels.template.adapter.add("rotation", function(rotation, target) {
+  target.maxWidth = target.dataItem.slice.radius - target.dataItem.slice.innerRadius - 10;
+  target.maxHeight = Math.abs(target.dataItem.slice.arc * (target.dataItem.slice.innerRadius + target.dataItem.slice.radius) / 2 * am4core.math.RADIANS);
+
+  return rotation;
+})
+
+
+var level1SeriesTemplate = level0SeriesTemplate.clone();
+
+level1SeriesTemplate.labels.template.text = "{category} {name.name}";
+chart.seriesTemplates.setKey("1", level1SeriesTemplate)
+level1SeriesTemplate.fillOpacity = 0.75;
+level1SeriesTemplate.hiddenInLegend = true;
+
+
+var level2SeriesTemplate = level0SeriesTemplate.clone();
+level2SeriesTemplate.labels.template.text = "{category} {name.name}";
+chart.seriesTemplates.setKey("2", level2SeriesTemplate)
+level2SeriesTemplate.fillOpacity = 0.5;
+level2SeriesTemplate.hiddenInLegend = true;
+
+chart.legend = new am4charts.Legend();
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: ""
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+
+    <script>
+      let allLines = []
+
+      window.addEventListener("message", (message) => {
+        if (message.data.console){
+          let insert = document.querySelector("#insert")
+          allLines.push(message.data.console.payload)
+          insert.innerHTML = allLines.join(";\r")
+
+          let result = eval.call(null, message.data.console.payload)
+          if (result !== undefined){
+            console.log(result)
+          }
+        }
+      })
+    </script>
+
+</body>
+</html>
