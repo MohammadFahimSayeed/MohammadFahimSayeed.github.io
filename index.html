@@ -63,7 +63,7 @@ height: 100%; margin: 0}
 
 
 #chartdiv {
-  height: 100%; position:"right"; padding-left:2% 
+  height: 100%; position:"right"; padding-left:300px; 
 }
 
 
@@ -185,7 +185,7 @@ am4core.useTheme(am4themes_animated);
 
 // create chart
 var chart = am4core.create("chartdiv", am4plugins_sunburst.Sunburst);
-chart.padding(0, 0, 5%,0);
+chart.padding(0, 0,200,0);
 chart.radius = am4core.percent(98);
 chart.exporting.menu = new am4core.ExportMenu();
 chart.exporting.menu.align = "right";
