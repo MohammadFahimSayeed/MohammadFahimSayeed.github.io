@@ -3,16 +3,40 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Sunburst chart</title>
+  <title>Computer Science Modules</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
 
+<section class="section main-banner" id="top" data-section="section1">
+    <video autoplay muted loop id="bg-video">
+        <source src="assets/images/course-video.mp4" type="video/mp4" />
+    </video>
 
+    <div class="video-overlay header-text">
+        <div class="caption">
+            <h6>Pogram Modules</h6>
+            <h2><em>Computer</em> Sciences</h2>
+            <div class="main-button">
+                <div class="scroll-to-section"><a href="#section2"; onclick=scrollWin(0,560)>Data Visualisation</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+  function scrollWin(x, y) {
+    window.scrollBy(x, y);
+  }
+  </script>
   <script
-    type="text/javascript"
-    src="/js/lib/dummy.js"
+    type="assets/text/javascript"
+    src="assets/js/lib/dummy.js"
     
   ></script>
 
@@ -20,21 +44,40 @@
 
 
   <style id="compiled-css" type="text/css">
-      body {
+      body, html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+height: 100%; margin: 0}
+
+
+.bg{
+  /* The image used */
+  background-image: url("/amcharts4-master/image.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+
 #chartdiv {
-  height: 950px;
-  width: 950px;
-  
+  height: 750px;
+  width: 950px; position: "right"; padding-left: 300px; 
 }
+
+
     /* EOS */
   </style>
+
+ 
 
   <script id="insert"></script>
 
 
-    <script src="/js/stringify.js?22a652ba743b18b574be86f11f0f3591afb2159c" charset="utf-8"></script>
+    <script src="/js/stringify.js?d1ab127e7e151d7e7c79552a6285aad3b5ef4420" charset="utf-8"></script>
     <script>
       const customConsole = (w) => {
         const pushToConsole = (payload, type) => {
@@ -117,7 +160,11 @@
 <script src="https://cdn.amcharts.com/lib/4/plugins/sunburst.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<div class="bg">
 <div id="chartdiv"></div>
+<div class="h1"></div>
+</div>
+
 
     <script type="text/javascript">//<![CDATA[
 
@@ -141,11 +188,21 @@ am4core.useTheme(am4themes_animated);
 
 // create chart
 var chart = am4core.create("chartdiv", am4plugins_sunburst.Sunburst);
-chart.padding(0, 0, 0, 0);
+chart.padding(0, 0, 200,0);
 chart.radius = am4core.percent(98);
 chart.exporting.menu = new am4core.ExportMenu();
-chart.exporting.menu.align = "left";
+chart.exporting.menu.align = "right";
 chart.exporting.menu.verticalAlign = "top"
+chart.legend = new am4charts.Legend();
+chart.legend.position = "left";
+chart.legend.valign = "middle";
+chart.legend.maxWidth= undefined;
+chart.legend.useDefaultMarker = true;
+let marker = chart.legend.markers.template.children.getIndex(0);
+marker.cornerRadius(12, 12, 12, 12);
+marker.strokeWidth = 2;
+marker.strokeOpacity = 1;
+marker.stroke = am4core.color("#ccc");
 
 chart.data = [{
     name: "Artificial Intelligence",
@@ -205,7 +262,7 @@ chart.data = [{
         }]
       },
       {
-        name: "Natural Language Processing",
+        name: "Natural language processing",
         children: [{
           name: "University of Applied Sciences",
           value: 100
@@ -401,8 +458,9 @@ chart.data = [{
 ];
 
 chart.colors.step = 2;
-chart.fontSize = 10;
+chart.fontSize = 7;
 chart.innerRadius = am4core.percent(10);
+chart.legend.fontSize= 12;
 
 // define data fields
 chart.dataFields.value = "value";
@@ -441,7 +499,7 @@ chart.seriesTemplates.setKey("2", level2SeriesTemplate)
 level2SeriesTemplate.fillOpacity = 0.5;
 level2SeriesTemplate.hiddenInLegend = true;
 
-chart.legend = new am4charts.Legend();
+
 
 
 
