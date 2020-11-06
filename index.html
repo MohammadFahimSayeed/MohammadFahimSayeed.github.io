@@ -63,7 +63,7 @@
 }
 
 
-#chartdiv { min-height: 60vw;
+#chartdiv { min-height: 50vw;
 min-width: 20vw; position: relative; font-size: 2vmin; 
 }
 
@@ -197,7 +197,7 @@ chart.exporting.menu.verticalAlign = "top"
 chart.legend = new am4charts.Legend();
 chart.legend.position = "left";
 chart.legend.valign = "top";
-chart.legend.maxWidth= undefined;
+chart.legend.maxWidth= 10vw;
 chart.legend.useDefaultMarker = true;
 let marker = chart.legend.markers.template.children.getIndex(0);
 marker.cornerRadius(12, 12, 12, 12);
