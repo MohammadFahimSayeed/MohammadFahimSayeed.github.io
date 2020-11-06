@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Computer Science Modules</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Computer Science Modules</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +13,10 @@
   <link rel="stylesheet" href="assets/css/owl.css">
   <link rel="stylesheet" href="assets/css/lightbox.css">
 
+
 <section class="section main-banner" id="top" data-section="section1">
     <video autoplay muted loop id="bg-video">
-        <source src="assets/images/course-video.mp4" type="video/mp4" />
+        <source src="assets/images/course-video.mp4" type="video/mp4" style="width: 100%"/>
     </video>
 
     <div class="video-overlay header-text">
@@ -23,7 +24,7 @@
             <h6>Pogram Modules</h6>
             <h2><em>Computer</em> Sciences</h2>
             <div class="main-button">
-                <div class="scroll-to-section"><a href="#section2" onclick=scrollWin(0,580)>Data Visualisation</a></div>
+                <div class="scroll-to-section"><a href="#section2" onclick=scrollWin(0,560)>Data Visualisation</a></div>
             </div>
         </div>
     </div>
@@ -43,9 +44,9 @@
 
 
   <style id="compiled-css" type="text/css">
-      .body, html {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-height: 100%; margin: 0}
+      body, html {
+  font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ width: 100%; margin: 0}
 
 
 .bg{
@@ -53,7 +54,7 @@ height: 100%; margin: 0}
   background-image: url("/amcharts4-master/image.jpg");
 
   /* Full height */
-  height: 100%; 
+  height: 100%;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -62,8 +63,8 @@ height: 100%; margin: 0}
 }
 
 
-#chartdiv {
-  height: 100%; position:"right"; padding-left:300px; 
+#chartdiv { min-height: 75vw;
+min-width: 75vw; position: relative; font-size: 2vmin; 
 }
 
 
@@ -153,13 +154,16 @@ height: 100%; margin: 0}
     </script>
 </head>
 <body>
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/plugins/sunburst.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <div class="bg">
 <div id="chartdiv"></div>
+<div class="h1"></div>
+
+
 </div>
 
 
@@ -185,14 +189,14 @@ am4core.useTheme(am4themes_animated);
 
 // create chart
 var chart = am4core.create("chartdiv", am4plugins_sunburst.Sunburst);
-chart.padding(0, 0,200,0);
+chart.padding(0, 0, 2, 2);
 chart.radius = am4core.percent(98);
 chart.exporting.menu = new am4core.ExportMenu();
 chart.exporting.menu.align = "right";
 chart.exporting.menu.verticalAlign = "top"
 chart.legend = new am4charts.Legend();
 chart.legend.position = "left";
-chart.legend.valign = "middle";
+chart.legend.valign = "top";
 chart.legend.maxWidth= undefined;
 chart.legend.useDefaultMarker = true;
 let marker = chart.legend.markers.template.children.getIndex(0);
@@ -455,9 +459,10 @@ chart.data = [{
 ];
 
 chart.colors.step = 2;
-chart.fontSize = 7;
+chart.maxfontSize= 9;
 chart.innerRadius = am4core.percent(10);
-chart.legend.fontSize= 12;
+chart.legend.maxfontSize= 12;
+
 
 // define data fields
 chart.dataFields.value = "value";
@@ -472,7 +477,7 @@ chart.seriesTemplates.setKey("0", level0SeriesTemplate)
 // this makes labels to be hidden if they don't fit
 level0SeriesTemplate.labels.template.truncate = true;
 level0SeriesTemplate.labels.template.text = "{category} {name.name}";
-//level0SeriesTemplate.labels.template.hideOversized = true;
+level0SeriesTemplate.labels.template.hideOversized = true;
 
 level0SeriesTemplate.labels.template.adapter.add("rotation", function(rotation, target) {
   target.maxWidth = target.dataItem.slice.radius - target.dataItem.slice.innerRadius - 10;
